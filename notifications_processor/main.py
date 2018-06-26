@@ -17,7 +17,7 @@ def process_notifications(events_csv_path: str,
 
     input_df = pandas.read_csv(events_csv_path, header=None)
 
-    notifications = []
+    all_notifications = []
 
     # Parse rows and add each users event to corresponding UserNotifications object in user_notifications_dict
     for row in input_df.itertuples():
@@ -29,14 +29,15 @@ def process_notifications(events_csv_path: str,
             user_notifications_dict[user_id] = UserNotifications(user_id)
 
         # Collect all notifications
-        notifications.extend(user_notifications_dict[user_id].add_event_and_return_notifications(event))
+        notifications = user_notifications_dict[user_id].add_event_and_return_notifications(event)
+        all_notifications.extend(notifications)
 
-    if print_to_stdout:
-        for notification in notifications:
-            print(notification)
+        if print_to_stdout:
+            for notification in notifications:
+                print(notification)
 
     # Export to CSV
-    output_df = pandas.DataFrame(notifications)
+    output_df = pandas.DataFrame(all_notifications)
     output_df.to_csv(output_path, index=False, header=True)
 
 
