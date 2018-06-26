@@ -129,6 +129,52 @@
       receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
       message: 'Geir, Lina, Μεταγένης went on a tour...'
 -
+  testing: 6 events at the same time, and last after 12h
+  test_category: add_event_and_return_notifications
+  user_id: 8473CCCE79294CB494D1B42E2B1BAA
+  events:
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 12:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+  notifications:
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 00:06:47'
+      tours: '1'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Geir went on a tour...'
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 00:06:47'
+      tours: '6'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Geir went on a tour...'
+-
   testing: 2  close events (<10s) every 6h
   test_category: add_event_and_return_notifications
   user_id: 8473CCCE79294CB494D1B42E2B1BAA
