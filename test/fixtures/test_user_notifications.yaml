@@ -1,0 +1,412 @@
+-
+  testing: 4 sparse (>6h) events
+  test_category: add_event_and_return_notifications
+  user_id: 8473CCCE79294CB494D1B42E2B1BAA
+  events:
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 07:08:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 14:06:47'
+      friend_id: 'E0A86D5E6909EF85D22FF6ED7BF865'
+      friend_name: 'Maia'
+    -
+      event_datetime: '2017-08-01 21:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+  notifications:
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 00:06:47'
+      tours: '1'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Geir went on a tour...'
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 07:08:47'
+      tours: '1'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Lina went on a tour...'
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 14:06:47'
+      tours: '1'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Maia went on a tour...'
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 21:06:47'
+      tours: '1'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Lina went on a tour...'
+-
+  testing: 4 sparse events every 6h
+  test_category: add_event_and_return_notifications
+  user_id: 8473CCCE79294CB494D1B42E2B1BAA
+  events:
+    -
+      event_datetime: '2017-08-01 00:00:00'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 06:00:00'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 12:00:00'
+      friend_id: 'E0A86D5E6909EF85D22FF6ED7BF865'
+      friend_name: 'Maia'
+    -
+      event_datetime: '2017-08-01 18:00:00'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+  notifications:
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 00:00:00'
+      tours: '1'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Geir went on a tour...'
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 06:00:00'
+      tours: '1'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Lina went on a tour...'
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 12:00:00'
+      tours: '1'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Maia went on a tour...'
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 18:00:00'
+      tours: '1'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Lina went on a tour...'
+-
+  testing: 4 events in less than 6h, then one event after 8h
+  test_category: add_event_and_return_notifications
+  user_id: 8473CCCE79294CB494D1B42E2B1BAA
+  events:
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 02:45:54'
+      friend_id: '37C610ECB4E01970E7D9A4420F0EF9'
+      friend_name: 'Μεταγένης'
+    -
+      event_datetime: '2017-08-01 03:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 08:00:00'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+  notifications:
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 00:06:47'
+      tours: '1'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Geir went on a tour...'
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 00:06:47'
+      tours: '4'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Geir, Lina, Μεταγένης went on a tour...'
+-
+  testing: 2  close events (<10s) every 6h
+  test_category: add_event_and_return_notifications
+  user_id: 8473CCCE79294CB494D1B42E2B1BAA
+  events:
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 00:06:48'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 06:06:48'
+      friend_id: 'E0A86D5E6909EF85D22FF6ED7BF865'
+      friend_name: 'Maia'
+    -
+      event_datetime: '2017-08-01 06:06:49'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 12:06:49'
+      friend_id: '2A79106D82BC7EBCB50F4639EB7228'
+      friend_name: 'Jasmina'
+    -
+      event_datetime: '2017-08-01 12:06:50'
+      friend_id: '153CDCFBF9AD0C6A7727E6FB53A62D'
+      friend_name: 'Iustinian'
+    -
+      event_datetime: '2017-08-01 18:06:50'
+      friend_id: 'A89EEC8FD82F14467024CA146687B7'
+      friend_name: 'Viorel'
+    -
+      event_datetime: '2017-08-01 18:06:51'
+      friend_id: 'DC3E2E638CEB2D1AE8558DBDD9091A'
+      friend_name: 'Hannah'
+  notifications:
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 00:06:47'
+      tours: '1'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Geir went on a tour...'
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 00:06:48'
+      tours: '2'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Lina, Maia went on a tour...'
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 06:06:49'
+      tours: '2'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Jasmina, Lina went on a tour...'
+    -
+      notification_sent:
+      timestamp_first_tour: '2017-08-01 12:06:50'
+      tours: '2'
+      receiver_id: '8473CCCE79294CB494D1B42E2B1BAA'
+      message: 'Iustinian, Viorel went on a tour...'
+-
+  testing: 4 sparse (>6h) events
+  test_category: notifications_count_per_day
+  user_id: 8473CCCE79294CB494D1B42E2B1BAA
+  events:
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 07:08:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 14:06:47'
+      friend_id: 'E0A86D5E6909EF85D22FF6ED7BF865'
+      friend_name: 'Maia'
+    -
+      event_datetime: '2017-08-01 21:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+  notifications_count: 4
+-
+  testing: 2  close events (<10s) every 6h
+  test_category: notifications_count_per_day
+  user_id: 8473CCCE79294CB494D1B42E2B1BAA
+  events:
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 00:06:48'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 06:06:48'
+      friend_id: 'E0A86D5E6909EF85D22FF6ED7BF865'
+      friend_name: 'Maia'
+    -
+      event_datetime: '2017-08-01 06:06:49'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 12:06:49'
+      friend_id: '2A79106D82BC7EBCB50F4639EB7228'
+      friend_name: 'Jasmina'
+    -
+      event_datetime: '2017-08-01 12:06:50'
+      friend_id: '153CDCFBF9AD0C6A7727E6FB53A62D'
+      friend_name: 'Iustinian'
+    -
+      event_datetime: '2017-08-01 18:06:50'
+      friend_id: 'A89EEC8FD82F14467024CA146687B7'
+      friend_name: 'Viorel'
+    -
+      event_datetime: '2017-08-01 18:06:51'
+      friend_id: 'DC3E2E638CEB2D1AE8558DBDD9091A'
+      friend_name: 'Hannah'
+  notifications_count: 4
+-
+  testing: event every 2h
+  test_category: notifications_count_per_day
+  user_id: 8473CCCE79294CB494D1B42E2B1BAA
+  events:
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 02:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 04:06:47'
+      friend_id: 'E0A86D5E6909EF85D22FF6ED7BF865'
+      friend_name: 'Maia'
+    -
+      event_datetime: '2017-08-01 06:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 08:06:47'
+      friend_id: '2A79106D82BC7EBCB50F4639EB7228'
+      friend_name: 'Jasmina'
+    -
+      event_datetime: '2017-08-01 10:06:47'
+      friend_id: '153CDCFBF9AD0C6A7727E6FB53A62D'
+      friend_name: 'Iustinian'
+    -
+      event_datetime: '2017-08-01 12:06:47'
+      friend_id: 'A89EEC8FD82F14467024CA146687B7'
+      friend_name: 'Viorel'
+    -
+      event_datetime: '2017-08-01 14:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 16:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 18:06:47'
+      friend_id: 'E0A86D5E6909EF85D22FF6ED7BF865'
+      friend_name: 'Maia'
+    -
+      event_datetime: '2017-08-01 20:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 22:06:47'
+      friend_id: '2A79106D82BC7EBCB50F4639EB7228'
+      friend_name: 'Jasmina'
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '153CDCFBF9AD0C6A7727E6FB53A62D'
+      friend_name: 'Iustinian'
+  notifications_count: 4
+-
+  testing: event every 3h
+  test_category: notifications_count_per_day
+  user_id: 8473CCCE79294CB494D1B42E2B1BAA
+  events:
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 03:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 06:06:47'
+      friend_id: 'E0A86D5E6909EF85D22FF6ED7BF865'
+      friend_name: 'Maia'
+    -
+      event_datetime: '2017-08-01 09:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 12:06:47'
+      friend_id: '2A79106D82BC7EBCB50F4639EB7228'
+      friend_name: 'Jasmina'
+    -
+      event_datetime: '2017-08-01 18:06:47'
+      friend_id: '153CDCFBF9AD0C6A7727E6FB53A62D'
+      friend_name: 'Iustinian'
+    -
+      event_datetime: '2017-08-01 21:06:47'
+      friend_id: 'A89EEC8FD82F14467024CA146687B7'
+      friend_name: 'Viorel'
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: 'DC3E2E638CEB2D1AE8558DBDD9091A'
+      friend_name: 'Hannah'
+  notifications_count: 4
+-
+  testing: event every 4h
+  test_category: notifications_count_per_day
+  user_id: 8473CCCE79294CB494D1B42E2B1BAA
+  events:
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 04:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 08:06:47'
+      friend_id: 'E0A86D5E6909EF85D22FF6ED7BF865'
+      friend_name: 'Maia'
+    -
+      event_datetime: '2017-08-01 12:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 16:06:47'
+      friend_id: '2A79106D82BC7EBCB50F4639EB7228'
+      friend_name: 'Jasmina'
+    -
+      event_datetime: '2017-08-01 20:06:47'
+      friend_id: '153CDCFBF9AD0C6A7727E6FB53A62D'
+      friend_name: 'Iustinian'
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: 'E0A86D5E6909EF85D22FF6ED7BF865'
+      friend_name: 'Maia'
+  notifications_count: 4
+-
+  testing: event every 5h
+  test_category: notifications_count_per_day
+  user_id: 8473CCCE79294CB494D1B42E2B1BAA
+  events:
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '06D188F4064E0D47BD760EEFEB7AAD'
+      friend_name: 'Geir'
+    -
+      event_datetime: '2017-08-01 05:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 10:06:47'
+      friend_id: 'E0A86D5E6909EF85D22FF6ED7BF865'
+      friend_name: 'Maia'
+    -
+      event_datetime: '2017-08-01 15:06:47'
+      friend_id: '723515D5D083C9C15EC9A24AA624D7'
+      friend_name: 'Lina'
+    -
+      event_datetime: '2017-08-01 20:06:47'
+      friend_id: '2A79106D82BC7EBCB50F4639EB7228'
+      friend_name: 'Jasmina'
+    -
+      event_datetime: '2017-08-01 00:06:47'
+      friend_id: '153CDCFBF9AD0C6A7727E6FB53A62D'
+      friend_name: 'Iustinian'
+  notifications_count: 4
