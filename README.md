@@ -111,7 +111,7 @@ It is possible to run application using Docker:
 
 Build Docker image:
 ```bash
-$> sudo docker build -t reljicd/komoot_challenge -f docker\Dockerfile .
+$> sudo docker build -t reljicd/komoot_challenge -f docker/Dockerfile .
 ```
 
 Run Docker container:
