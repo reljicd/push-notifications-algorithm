@@ -61,7 +61,9 @@ see strength, limitations and extensions. Finally just tell us what you’ve lea
 \[Optional\] Install virtual environment:
 
 ```bash
-$> python -m virtualenv venv
+$> sudo apt install python3-pip
+$> pip3 install virtualenv
+$> python3 -m virtualenv venv
 ```
 
 Activate virtual environment:
@@ -81,12 +83,17 @@ $> .\venv\Scripts\activate
 $> pip install -r requirements.txt
 ```
 
+Add project directory to PYTHONPATH
+```bash
+$> export PYTHONPATH=$PYTHONPATH:$(pwd)
+```
+
 ## How to run
 
 ### Default
 
 ```bash
-$> python notifications_processor\main.py --events_csv_path=input/notifications_short.csv --print_to_stdout=True
+$> python notifications_processor/main.py --events_csv_path=input/notifications_short.csv --print_to_stdout=True
 ```
 
 #### Helper script
@@ -94,8 +101,8 @@ $> python notifications_processor\main.py --events_csv_path=input/notifications_
 It is possible to run all of the above with helper script:
 
 ```bash
-$ chmod +x scripts/activate_venv_and_run.sh
-$ scripts/activate_venv_and_run.sh input/notifications_short.csv
+$> chmod +x scripts/activate_venv_and_run.sh
+$> scripts/activate_venv_and_run_python.sh notifications_processor/main.py --events_csv_path=input/notifications_short.csv --print_to_stdout=True
 ```
 
 ### Docker
@@ -104,21 +111,21 @@ It is possible to run application using Docker:
 
 Build Docker image:
 ```bash
-$> docker build -t reljicd/komoot_challenge -f docker\Dockerfile .
+$> sudo docker build -t reljicd/komoot_challenge -f docker\Dockerfile .
 ```
 
 Run Docker container:
 ```bash
-$> docker run --rm -i reljicd/komoot_challenge notifications_processor/main.py --events_csv_path=input/notifications_short.csv --print_to_stdout=True
+$> sudo docker run --rm -i reljicd/komoot_challenge notifications_processor/main.py --events_csv_path=input/notifications_short.csv --print_to_stdout=True
 ```
 
-#### Helper script
+#### Docker helper script
 
 It is possible to run all of the above with helper script:
 
 ```bash
-$ chmod +x scripts/run_docker.sh
-$ scripts/run_docker.sh input/notifications_short.csv
+$> chmod +x scripts/run_docker.sh
+$> sudo scripts/run_docker.sh notifications_processor/main.py --events_csv_path=input/notifications_short.csv --print_to_stdout=True
 ```
 
 ### Tests
@@ -128,17 +135,27 @@ Activate virtual environment:
 
 On macOS and Linux:
 ```bash
-$ source env/bin/activate
+$> source venv/bin/activate
 ```
 
 On Windows:
 ```bash
-$ .\env\Scripts\activate
+$> .\venv\Scripts\activate
 ```
 
 Running tests:
 ```bash
-$ python -m pytest
+$> export PYTHONPATH=$PYTHONPATH:$(pwd)
+$> python -m pytest
+```
+
+#### Helper script
+
+It is possible to run all of the above with helper script:
+
+```bash
+$> chmod +x scripts/activate_venv_and_run.sh
+$> scripts/activate_venv_and_run_python.sh -m pytest
 ```
 
 #### Docker
@@ -147,10 +164,19 @@ It is also possible to run tests using Docker:
 
 Build the Docker image:
 ```bash
-$> docker build -t reljicd/komoot_challenge -f docker/Dockerfile .
+$> sudo docker build -t reljicd/komoot_challenge -f docker/Dockerfile .
 ```
 
 Run the Docker container:
 ```bash
-$> docker run --rm -i reljicd/komoot_challenge -m pytest
+$> sudo docker run --rm -i reljicd/komoot_challenge -m pytest
+```
+
+#### Docker helper script
+
+It is possible to run all of the above with helper script:
+
+```bash
+$> chmod +x scripts/run_docker.sh
+$> sudo scripts/run_docker.sh -m pytest
 ```
