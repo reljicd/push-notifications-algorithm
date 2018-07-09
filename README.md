@@ -112,13 +112,6 @@ For tuning and optimization I wrote a lot of tests that covered several edge cas
 While running tests I tuned both smoothing factor and correction function.
 I chose in the end 0.5 for smoothing factor and Heaviside function for correction function.
 
-Also take note, in my code I used different names for some of these parameters:
-delay_factor - exp_average
-smoothing_factor -  EXP_AVERAGE_WEIGHT
-6H -  SECONDS_PER_6H_PERIOD 
-next_notification_time - next_notification_datetime
-last_pushed_event_time -  last_pushed_event_datetime
-
 ## Prerequisites
 
 \[Optional\] Install virtual environment:
