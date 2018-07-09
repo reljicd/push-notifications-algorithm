@@ -1,33 +1,25 @@
-# Komoot Challenge
+# Push Notifications Algorithm
 
-## About
+## About the Problem
 
-Backend Engineer (Algorithms)
-
-Thank you for your application! We liked what we have seen so far from you and want to take the next
-step: Inviting you to a small challenge that is quite close to what your tasks would look like.
-Komoot is a platform for outdoor enthusiasts where you can follow your friends and like-minded
-people to be informed about their latest tours. Some have only a few friends on komoot, others follow
-hundreds of users. At the moment every time a tour is uploaded to komoot all followers get a push
+Some users have only a few friends, others follow
+hundreds of users. At the moment every time an event by a user is uploaded all followers get a push
 notification on their mobile.
 
-We identified that this can lead to a huge amount of notifications for some users. That’s not
-acceptable as those users will be annoyed and eventually uninstall the app. We came up with the idea
-of bundling notifications to reduce the amount of notifications we send. That means we need to wait a
-bit to collect notifications until we can send those bundles. But we also know how important it is to
-send notifications as soon as possible: users want to know about the tours of their friends as soon as
+This can lead to a huge amount of notifications for some users. That’s not
+acceptable as those users will be annoyed and eventually uninstall the app. The idea
+is to bundle notifications to reduce the amount of notifications to send. That means to wait a
+bit to collect notifications until we can send those bundles. But it is also important to
+send notifications as soon as possible: users want to know about the events of their friends as soon as
 possible and start to talk about it.
 
-Our goal is
+The goal is
 * to not send more than 4 notifications a day to a user (should happen only few times)
 * to keep sending delay minimal
 
-Here is where we need your help to meet these contradictory requirements and find a clever and
-optimized solution.
-
 ### Input
-We prepared some sample data in a CSV file that simulates an incoming event stream. Every line
-represents a new tour of a friend of which we want to inform a user.
+Sample data in a CSV file that simulates an incoming event stream. Every line
+represents a new event of a friend of which we want to inform a user.
 
 ```
 timestamp user_id friend_id friend_name
@@ -45,16 +37,87 @@ notification_sent timestamp_first_tour tours receiver_id message
 tour
 ```
 
-### Requirements
-Choose language and tools as your like. An excellent engineer should manage to do this challenge in a
-few hours. Please send us the code, a small description and instruction how to setup and run your
-application on a Mac or Linux machine. Please provide a command line parameter to specify the csv
-file and print the csv result to stdout.
-```bash
-$> your_application https://s3.../backend/challenge/notifications.csv
+## Solution
+
+The problem is finding the optimal solution to two conflicting constraints:
+1. To not send more than 4 messages per day.
+2. But to send messages as soon as you can.
+
+Based on the constraints, we have 2 edge cases:
+* On one end of the spectrum we have constant stream of high frequency events that are very close together (minutes, seconds...). 
+For this case it is obvious that we need to cache them and then every 6h bundle them together and publish them.
+In this case delay since the first event in this group should be 6h.
+
+```delay = 6h```
+
+```delay_factor = 1```
+
+* On the other end of the spectrum we have low frequency events that are more than 6h apart. 
+For this case we can publish those events as soon as they arrive. 
+In this case the delay since the first event in this group should be 0
+
+```delay = 0```
+
+```delay_factor = 0```
+
+Based on the first edge case I introduced this ***6h interval***.
+Based on that interval I introduced delay factor:
+
+```delay = delay_factor * 6h```
+
+In the real system number of friends per user should not change too rapidly too often. That means that frequency of the events per user should be fairly consistent.
+In other words, for a user with very few friends events should be low frequent and for this user those events should be published as soon as they arrive. For this user high frequency events should be anomaly, not a rule.
+For a user with great number of friends events should be high frequent and for this user those events would be bundled and published every 6h. For this user low frequency events should be anomaly, not a rule.
+But those anomalies could occur in real systems.
+
+Because of this I am taking into account both history of the delays as well as frequency of the most recent events. 
+In order to take history of the delays into account, I calculate delay factor as exponential average (https://en.wikipedia.org/wiki/Exponential_smoothing):
+
+```delay_factor = delay_factor * smoothing_factor + correction * (1 - smoothing_factor)```
+
+That way if there is anomaly in the frequency of the events it will not make too much of the impact on the delay. 
+But if the frequency really changed delay will exponentially adapt to this.
+
+Now I need some way to calculate correction.
+I choose Heaviside unit step function (https://en.wikipedia.org/wiki/Heaviside_step_function):
 ```
-Also provide additional information to help us understand how you came to this solution, where you
-see strength, limitations and extensions. Finally just tell us what you’ve learned during the challenge
+f(x) = (0, x >= 6H;
+        1, x < 6H)
+```
+where x is time delta between last arrived event and the last pushed event.
+This function is based on those two edge cases from the beginning. 
+In other words, for each event that arrived less than 6h after the previous correction is 1.
+For each event that arrived more than 6h after the previous correction is 0.
+
+I also experimented with this function (I assumed step function is too discontinuous and maybe smoother logarithmic correction for values will yield better results):
+```
+f(x) = (1, x <= 6H/10;
+        -log(x/6H), 6H/10 < x < 6H;
+        0, x >= 6H)
+```
+but found that Heaviside step function works much better.
+
+With these parameters I can easily calculate time when next message should be published:
+
+```next_notification_time = last_pushed_event_time + delay```
+
+Now each time a new event for a user arrives I update correction and delay factor values and then calculate what should be the next notification time. 
+If that time is before that event's arrival time I bundle all the piled events together with that last arrived event and push them.
+If it is not I push the event to the list of the piled up events. 
+
+Also, first event for each user is published straight away (delay_factor starts at 0).
+For each subsequent event I calculate the new correction, delay factor and the next notification time.
+
+For tuning and optimization I wrote a lot of tests that covered several edge cases. 
+While running tests I tuned both smoothing factor and correction function.
+I chose in the end 0.5 for smoothing factor and Heaviside function for correction function.
+
+Also take note, in my code I used different names for some of these parameters:
+delay_factor - exp_average
+smoothing_factor -  EXP_AVERAGE_WEIGHT
+6H -  SECONDS_PER_6H_PERIOD 
+next_notification_time - next_notification_datetime
+last_pushed_event_time -  last_pushed_event_datetime
 
 ## Prerequisites
 
