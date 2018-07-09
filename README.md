@@ -167,12 +167,12 @@ It is possible to run application using Docker:
 
 Build Docker image:
 ```bash
-$> sudo docker build -t reljicd/komoot_challenge -f docker/Dockerfile .
+$> sudo docker build -t reljicd/push_notifications_algorithm -f docker/Dockerfile .
 ```
 
 Run Docker container:
 ```bash
-$> sudo docker run --rm -i reljicd/komoot_challenge notifications_processor/main.py --events_csv_path=input/notifications_short.csv --print_to_stdout=True
+$> sudo docker run --rm -i reljicd/push_notifications_algorithm notifications_processor/main.py --events_csv_path=input/notifications_short.csv --print_to_stdout=True
 ```
 
 #### Docker helper script
@@ -220,12 +220,12 @@ It is also possible to run tests using Docker:
 
 Build the Docker image:
 ```bash
-$> sudo docker build -t reljicd/komoot_challenge -f docker/Dockerfile .
+$> sudo docker build -t reljicd/push_notifications_algorithm -f docker/Dockerfile .
 ```
 
 Run the Docker container:
 ```bash
-$> sudo docker run --rm -i reljicd/komoot_challenge -m pytest
+$> sudo docker run --rm -i reljicd/push_notifications_algorithm -m pytest
 ```
 
 #### Docker helper script
